@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    div.container.mt-4
+        form(action='/', method='post')
+            div.form-group
+                label(for='base') Ingrese el número base para la tabla de multiplicar:
+                input#base.form-control(type='number', name='base', required)
+            div
+                button.btn.btn-primary(type='submit') Obtener Tabla de Multiplicar

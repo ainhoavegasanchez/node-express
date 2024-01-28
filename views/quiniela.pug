@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    div#container
+        table.table.table-striped.table-primary
+            thead
+                tr
+                th(scope='col') QUINIELA
+            tbody
+        button#quinielabtn.btn.btn-warning(type='button') Generar quiniela
+    script(src="/socket.io/socket.io.js")
+    script.
+        const socket = io();
+        const btnEnviar = document.getElementById('quinielabtn');
+        const tbody  = document.getElementsByTagName('tbody')[0];
+        btnEnviar.addEventListener('click', () => {
+            socket.emit('quiniela', {});
+        });
+
+        socket.on('quiniela', datos => {
+            const btnEnviar = document.getElementById('quinielabtn');
+            tbody.textContent = "";
+            datos.forEach((resultado) => {
+                let tr = document.createElement('tr');
+                tbody.append(tr);
+                let td = document.createElement('td');
+                td.textContent = resultado;
+                tr.append(td);    
+                });
+            btnEnviar.style.display= "none";
+        });
+        
+        
